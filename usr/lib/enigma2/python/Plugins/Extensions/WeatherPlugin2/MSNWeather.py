@@ -120,6 +120,8 @@ class MSNWeather:
 		language = config.osd.language.value.replace("_","-")
 		if language == "en-EN": # hack
 			language = "en-US"
+		elif language == "zh-CN": # hack
+			language = "en-US"
 		elif language == "no-NO": # hack
 			language = "nn-NO"
 		self.city = city

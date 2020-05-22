@@ -255,6 +255,8 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			language = config.osd.language.value.replace("_","-")
 			if language == "en-EN": # hack
 				language = "en-US"
+			elif language == "zh-CN": # hack
+				language = "en-US"
 			elif language == "no-NO": # hack
 				language = "nn-NO"
 			url = "http://weather.service.msn.com/find.aspx?src=outlook&outputview=search&weasearchstr=%s&culture=%s" % (urllib_quote(self.current.city.value), language)
