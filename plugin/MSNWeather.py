@@ -121,7 +121,7 @@ class MSNWeather:
 		if language == "en-EN": # hack
 			language = "en-US"
 		elif language == "zh-CN": # hack
-			language = "en-US"
+			language = "zh-CH"
 		elif language == "no-NO": # hack
 			language = "nn-NO"
 		self.city = city
