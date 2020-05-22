@@ -9,12 +9,12 @@
 # This plugin is open source but it is NOT free software.
 #
 # This plugin may only be distributed to and executed on hardware which
-# is licensed by Dream Property GmbH.
+# is licensed by Dream Multimedia GmbH.
 # In other words:
 # It's NOT allowed to distribute any parts of this plugin or its source code in ANY way
-# to hardware which is NOT licensed by Dream Property GmbH.
+# to hardware which is NOT licensed by Dream Multimedia GmbH.
 # It's NOT allowed to execute this plugin and its source code or even parts of it in ANY way
-# on hardware which is NOT licensed by Dream Property GmbH.
+# on hardware which is NOT licensed by Dream Multimedia GmbH.
 #
 # If you want to use or modify the code or parts of it,
 # you have to keep MY license and inform me about the modifications by mail.
@@ -23,16 +23,13 @@
 from Renderer import Renderer
 from enigma import ePixmap
 from Components.AVSwitch import AVSwitch
-from enigma import ePicLoad, eRect, eSize, gPixmapPtr
+from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
 
 class MSNWeatherPixmap(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
 		self.picload = ePicLoad()
-                try:
-			self.picload.PictureData.get().append(self.paintIconPixmapCB)
-                except:
-                        self.picload_conn = self.picload.PictureData.connect(self.paintIconPixmapCB)
+		self.picload.PictureData.get().append(self.paintIconPixmapCB)
 		self.iconFileName = ""
 
 	GUI_WIDGET = ePixmap
@@ -48,10 +45,7 @@ class MSNWeatherPixmap(Renderer):
 		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000'))
 		
 	def disconnectAll(self):
-                try:
-			self.picload.PictureData.get().remove(self.paintIconPixmapCB)
-                except:
-                        self.picload_conn = None
+		self.picload.PictureData.get().remove(self.paintIconPixmapCB)
 		self.picload = None
 		Renderer.disconnectAll(self)
 		

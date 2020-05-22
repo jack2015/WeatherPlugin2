@@ -9,19 +9,19 @@
 # This plugin is open source but it is NOT free software.
 #
 # This plugin may only be distributed to and executed on hardware which
-# is licensed by Dream Property GmbH.
+# is licensed by Dream Multimedia GmbH.
 # In other words:
 # It's NOT allowed to distribute any parts of this plugin or its source code in ANY way
 # to hardware which is NOT licensed by Dream Multimedia GmbH.
 # It's NOT allowed to execute this plugin and its source code or even parts of it in ANY way
-# on hardware which is NOT licensed by Dream Property GmbH.
+# on hardware which is NOT licensed by Dream Multimedia GmbH.
 #
 # If you want to use or modify the code or parts of it,
 # you have to keep MY license and inform me about the modifications by mail.
 #
 
-from enigma import eTimer
-from Plugins.Extensions.WeatherPlugin2.MSNWeather import MSNWeather
+from enigma import eEnv, eTimer
+from Plugins.Extensions.WeatherPlugin.MSNWeather import MSNWeather
 
 class WeatherMSN:
 	TIMER_INTERVAL = 1800
@@ -30,10 +30,7 @@ class WeatherMSN:
 		self.callbacks = [ ]
 		self.callbacksAllIconsDownloaded = []
 		self.timer = eTimer()
-                try:
-		     self.timer.callback.append(self.getData)
-                except:
-		     self.timer_conn = self.timer.timeout.connect(self.getData)
+		self.timer.callback.append(self.getData)
 	
 	def getData(self):
 		self.timer.stop()
