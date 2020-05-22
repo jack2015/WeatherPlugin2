@@ -73,7 +73,7 @@ class MSNWeather:
 			path = os_path.dirname(resolveFilename(SCOPE_SKIN, config.skin.primary_skin.value)) + "/weather_icons/"
 			extension = self.checkIconExtension(path)
 		if extension is None:
-			path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WeatherPlugin2/icons/")
+			path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/")
 			extension = ".gif"
 		self.setIconPath(path)
 		self.setIconExtension(extension)
@@ -133,9 +133,9 @@ class MSNWeather:
 		
 	def getDefaultWeatherData(self, callback = None, callbackAllIconsDownloaded = None):
 		self.initialize()
-		weatherPluginEntryCount = config.plugins.WeatherPlugin2.entrycount.value
+		weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if weatherPluginEntryCount >= 1:
-			weatherPluginEntry = config.plugins.WeatherPlugin2.Entry[0]
+			weatherPluginEntry = config.plugins.WeatherPlugin.Entry[0]
 			self.getWeatherData(weatherPluginEntry.degreetype.value, weatherPluginEntry.weatherlocationcode.value, weatherPluginEntry.city.value, callback, None, callbackAllIconsDownloaded)
 			return 1
 		else:

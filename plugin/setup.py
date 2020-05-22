@@ -45,11 +45,11 @@ def initWeatherPluginEntryConfig():
 	s.city = ConfigText(default = "Heidelberg", visible_width = 100, fixed_size = False)
 	s.degreetype = ConfigSelection(choices = [("C", _("metric system")), ("F", _("imperial system"))], default = "C")
 	s.weatherlocationcode = ConfigText(default = "", visible_width = 100, fixed_size = False)
-	config.plugins.WeatherPlugin2.Entry.append(s)
+	config.plugins.WeatherPlugin.Entry.append(s)
 	return s
 
 def initConfig():
-	count = config.plugins.WeatherPlugin2.entrycount.value
+	count = config.plugins.WeatherPlugin.entrycount.value
 	if count != 0:
 		i = 0
 		while i < count:
@@ -90,7 +90,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.title = _("WeatherPlugin2: List of Entries")
+		self.title = _("WeatherPlugin: List of Entries")
 		self["city"] = StaticText(_("City"))
 		self["degreetype"] = StaticText(_("System"))
 		self["key_red"] = StaticText(_("Back"))
@@ -135,17 +135,17 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		except: sel = None
 		if sel is None:
 			return
-		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this WeatherPlugin2 Entry?"))
+		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this WeatherPlugin Entry?"))
 
 	def deleteConfirm(self, result):
 		if not result:
 			return
 		sel = self["entrylist"].l.getCurrentSelection()[0]
-		config.plugins.WeatherPlugin2.entrycount.value -= 1
-		config.plugins.WeatherPlugin2.entrycount.save()
-		config.plugins.WeatherPlugin2.Entry.remove(sel)
-		config.plugins.WeatherPlugin2.Entry.save()
-		config.plugins.WeatherPlugin2.save()
+		config.plugins.WeatherPlugin.entrycount.value -= 1
+		config.plugins.WeatherPlugin.entrycount.save()
+		config.plugins.WeatherPlugin.Entry.remove(sel)
+		config.plugins.WeatherPlugin.Entry.save()
+		config.plugins.WeatherPlugin.save()
 		configfile.save()
 		self.updateList()
 
@@ -171,7 +171,7 @@ class WeatherPluginEntryList(MenuList):
 
 	def buildList(self):
 		list = []
-		for c in config.plugins.WeatherPlugin2.Entry:
+		for c in config.plugins.WeatherPlugin.Entry:
 		    if skinwidth == 1280:
 			res = [
 				c,
@@ -219,7 +219,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 
 	def __init__(self, session, entry):
 		Screen.__init__(self, session)
-		self.title = _("WeatherPlugin2: Edit Entry")
+		self.title = _("WeatherPlugin: Edit Entry")
 		self["config"] = MSNWeatherPluginEntryConfigScreen2([])
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -267,10 +267,10 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	def keySave(self):
 		if self.current.city.value != "" and self.current.weatherlocationcode.value != "":
 			if self.newmode == 1:
-				config.plugins.WeatherPlugin2.entrycount.value = config.plugins.WeatherPlugin2.entrycount.value + 1
-				config.plugins.WeatherPlugin2.entrycount.save()
+				config.plugins.WeatherPlugin.entrycount.value = config.plugins.WeatherPlugin.entrycount.value + 1
+				config.plugins.WeatherPlugin.entrycount.save()
 			ConfigListScreen.keySave(self)
-			config.plugins.WeatherPlugin2.save()
+			config.plugins.WeatherPlugin.save()
 			configfile.save()
 			self.close()
 		else:
@@ -281,23 +281,23 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 
 	def keyCancel(self):
 		if self.newmode == 1:
-			config.plugins.WeatherPlugin2.Entry.remove(self.current)
+			config.plugins.WeatherPlugin.Entry.remove(self.current)
 		ConfigListScreen.cancelConfirm(self, True)
 
 	def keyDelete(self):
 		if self.newmode == 1:
 			self.keyCancel()
 		else:		
-			self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this WeatherPlugin2 Entry?"))
+			self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this WeatherPlugin Entry?"))
 
 	def deleteConfirm(self, result):
 		if not result:
 			return
-		config.plugins.WeatherPlugin2.entrycount.value = config.plugins.WeatherPlugin2.entrycount.value - 1
-		config.plugins.WeatherPlugin2.entrycount.save()
-		config.plugins.WeatherPlugin2.Entry.remove(self.current)
-		config.plugins.WeatherPlugin2.Entry.save()
-		config.plugins.WeatherPlugin2.save()
+		config.plugins.WeatherPlugin.entrycount.value = config.plugins.WeatherPlugin.entrycount.value - 1
+		config.plugins.WeatherPlugin.entrycount.save()
+		config.plugins.WeatherPlugin.Entry.remove(self.current)
+		config.plugins.WeatherPlugin.Entry.save()
+		config.plugins.WeatherPlugin.save()
 		configfile.save()
 		self.close()
 
@@ -345,7 +345,7 @@ class MSNWeatherPluginEntryConfigScreen2(MenuList):
 
 	def buildList(self):
 		list = []
-		for c in config.plugins.WeatherPlugin2.Entry:
+		for c in config.plugins.WeatherPlugin.Entry:
 		    if skinwidth == 1280:
 			res = [
 				c,

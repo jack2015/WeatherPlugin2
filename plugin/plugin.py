@@ -44,9 +44,9 @@ try:
 except:
 	WeatherMSNComp = None
 
-config.plugins.WeatherPlugin2 = ConfigSubsection()
-config.plugins.WeatherPlugin2.entrycount =  ConfigInteger(0)
-config.plugins.WeatherPlugin2.Entry = ConfigSubList()
+config.plugins.WeatherPlugin = ConfigSubsection()
+config.plugins.WeatherPlugin.entrycount =  ConfigInteger(0)
+config.plugins.WeatherPlugin.Entry = ConfigSubList()
 initConfig()
 
 
@@ -152,9 +152,9 @@ class MSNWeatherPlugin(Screen):
 		
 
 		self.weatherPluginEntryIndex = -1
-		self.weatherPluginEntryCount = config.plugins.WeatherPlugin2.entrycount.value
+		self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if self.weatherPluginEntryCount >= 1:
-			self.weatherPluginEntry = config.plugins.WeatherPlugin2.Entry[0]
+			self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[0]
 			self.weatherPluginEntryIndex = 1
 		else:
 			self.weatherPluginEntry = None
@@ -198,7 +198,7 @@ class MSNWeatherPlugin(Screen):
 			self.setItem()
 
 	def setItem(self):
-		self.weatherPluginEntry = config.plugins.WeatherPlugin2.Entry[self.weatherPluginEntryIndex-1]
+		self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[self.weatherPluginEntryIndex-1]
 		self.clearFields()
 		self.startRun()
 
@@ -262,13 +262,13 @@ class MSNWeatherPlugin(Screen):
         def showsetup(self):
                 self.session.openWithCallback(self.setupFinished, MSNWeatherPluginEntriesListConfigScreen)
 	def setupFinished(self, index, entry = None):
-		self.weatherPluginEntryCount = config.plugins.WeatherPlugin2.entrycount.value
+		self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
 		if self.weatherPluginEntryCount >= 1:
 			if entry is not None:
 				self.weatherPluginEntry = entry
 				self.weatherPluginEntryIndex = index + 1
 			if self.weatherPluginEntry is None:
-				self.weatherPluginEntry = config.plugins.WeatherPlugin2.Entry[0]
+				self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[0]
 				self.weatherPluginEntryIndex = 1
 		else:
 			self.weatherPluginEntry = None
