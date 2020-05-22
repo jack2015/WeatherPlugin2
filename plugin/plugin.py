@@ -233,15 +233,15 @@ class MSNWeatherPlugin(Screen):
 		if result == MSNWeather.ERROR:
 			self.error(errortext)
 		else:
-			self["caption"].text = self.weatherData.city
+			self["caption"].text = _(self.weatherData.city)
 			self.webSite = self.weatherData.url
 			for weatherData in self.weatherData.weatherItems.items():
 				item = weatherData[1]
 				if weatherData[0] == "-1": # current
 					self["currentTemp"].text = "%s°%s" % (item.temperature, self.weatherData.degreetype)
-					self["condition"].text = item.skytext
+					self["condition"].text = _(item.skytext)
 					self["humidity"].text = _("Humidity: %s %%") % item.humidity
-					self["wind_condition"].text = item.winddisplay
+					self["wind_condition"].text = _(item.winddisplay)
 					c =  time.strptime(item.observationtime, "%H:%M:%S")
 					self["observationtime"].text = _("Observation time: %s") %  time.strftime("%H:%M",c)
 					self["observationpoint"].text = _("Observation point: %s") % item.observationpoint
@@ -252,7 +252,7 @@ class MSNWeatherPlugin(Screen):
 					self["weekday%s" % index].text = "%s\n%s" % (item.day, time.strftime("%d. %b",c))
 					lowTemp = item.low
 					highTemp = item.high
-					self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, item.skytextday)
+					self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, _(item.skytextday))
 		
 		if self.weatherPluginEntryIndex == 1 and WeatherMSNComp is not None:
 			WeatherMSNComp.updateWeather(self.weatherData, result, errortext)
