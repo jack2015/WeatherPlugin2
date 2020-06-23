@@ -98,26 +98,29 @@ msgstr "英制"
 msgid "metric system"
 msgstr "公制"
 
-msgid "Sunny"
-msgstr "晴朗"
-
 msgid "Clear"
 msgstr "清爽"
-
-msgid "Mostly Cloudy"
-msgstr "大部多云"
 
 msgid "Rain"
 msgstr "下雨"
 
-msgid "Partly Sunny"
-msgstr "局部晴朗"
-
 msgid "Light Rain"
 msgstr "小雨"
 
+msgid "Partly Sunny"
+msgstr "局部晴朗"
+
+msgid "Mostly Sunny"
+msgstr "大部晴朗"
+
+msgid "Sunny"
+msgstr "晴朗"
+
 msgid "Partly Cloudy"
 msgstr "局部多云"
+
+msgid "Mostly Cloudy"
+msgstr "大部多云"
 
 msgid "Cloudy"
 msgstr "多云"
